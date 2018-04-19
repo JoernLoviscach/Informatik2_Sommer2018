@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BasteleienMitZufall"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Experimente" Height="400" Width="800">
     <Grid>
-        
+        <Button Click="buttonMeiner_Click"  Background="BurlyWood" Content="Berechne!" HorizontalAlignment="Left" Margin="58,72,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="3.253,-2.9"/>
+        <Label Content="Mittelwert aus 100x Würfeln" HorizontalAlignment="Left" Margin="58,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-1.115"/>
+        <Label x:Name="labelAusgabeMittelwert" Content="-" HorizontalAlignment="Left" Margin="68,100,0,0" VerticalAlignment="Top" Width="209"/>
+        <Canvas x:Name="zeichenfläche"  Background="LightBlue" HorizontalAlignment="Left" Height="212" Margin="369,56,0,0" VerticalAlignment="Top" Width="280"/>
+        <Button x:Name="button" Content="Würfel!" HorizontalAlignment="Left" Margin="274,207,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
     </Grid>
 </Window>
