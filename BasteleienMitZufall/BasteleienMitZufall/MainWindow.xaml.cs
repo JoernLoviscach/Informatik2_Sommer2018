@@ -23,10 +23,6 @@ namespace BasteleienMitZufall
         public MainWindow()
         {
             InitializeComponent();
-
-            sdkfjsudfh345452345
-                wrtueiuriuuzeirutze
-            blablabla4
         }
     }
 }
