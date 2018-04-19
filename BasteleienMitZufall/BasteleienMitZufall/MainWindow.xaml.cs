@@ -23,6 +23,8 @@ namespace BasteleienMitZufall
         public MainWindow()
         {
             InitializeComponent();
+
+            blablabla4
         }
     }
 }
