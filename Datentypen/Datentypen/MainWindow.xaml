@@ -1,0 +1,17 @@
+﻿<Window x:Class="Datentypen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Datentypen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="248,59,0,0" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="89,59,0,0" Text="23" TextChanged="textBox_TextChanged" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="166" Margin="89,113,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="453"/>
+        <Button x:Name="buttonZähle" Content="Zähle!" HorizontalAlignment="Left" Margin="627,142,0,0" VerticalAlignment="Top" Width="75" Click="buttonZähle_Click"/>
+
+
+    </Grid>
+</Window>
