@@ -58,8 +58,8 @@ namespace KlassenFürKataster
                     string[] koordinaten = punkte[k].Split(' ');
                     polygon.Points.Add(
                         new Point(
-                            0.5*(-467000 + double.Parse(koordinaten[0], CultureInfo.InvariantCulture)),
-                            0.5*(-5764000 + double.Parse(koordinaten[1], CultureInfo.InvariantCulture))
+                            0.2 * (-464000 + double.Parse(koordinaten[0], CultureInfo.InvariantCulture)),
+                            Zeichenfläche.Height - 0.2 *(-5765300 + double.Parse(koordinaten[1], CultureInfo.InvariantCulture))
                             ));
                 }
                 gebäude[i] = new Gebäude(polygon, teile[1], ushort.Parse(teile[2]), teile[3], teile[4]);
