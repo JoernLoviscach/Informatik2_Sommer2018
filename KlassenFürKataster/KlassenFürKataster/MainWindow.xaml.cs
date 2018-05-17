@@ -23,6 +23,16 @@ namespace KlassenFürKataster
     {
         public MainWindow()
         {
+            A a1 = new A(13); // class, also Referenztyp
+            A a2 = a1;
+            a1.X = 42;
+            int x2 = a2.X; // 42
+
+            B b1 = new B(13); // struct, also Werttyp
+            B b2 = b1;
+            b1.Y = 42;
+            int y2 = b2.Y; // 13
+
             InitializeComponent();
 
             // nur zur Erinnerung:
@@ -49,6 +59,7 @@ namespace KlassenFürKataster
                 string u = teile[0].Substring(11, teile[0].Length - 14);
                 string[] punkte = u.Split(',');
                 Polygon polygon = new Polygon();
+                polygon.ToolTip = i.ToString();
                 polygon.Fill = Brushes.Blue;
                 polygon.FillRule = FillRule.Nonzero;
                 polygon.Stroke = Brushes.Red;
@@ -64,6 +75,29 @@ namespace KlassenFürKataster
                 }
                 gebäude[i] = new Gebäude(polygon, teile[1], ushort.Parse(teile[2]), teile[3], teile[4]);
             }
+
+            int zahl = Gebäude.GesamtanzahlGebäude;
+
+            double f = gebäude[18792].BerechneFläche();
+
+            int minPunkte = int.MaxValue;
+            int maxPunkte = 0;
+            long summePunktzahl = 0;
+            for (int i = 0; i < anzahlGebäude; i++)
+            {
+                int z = gebäude[i].ZahlDerPunkte;
+                if(z < minPunkte)
+                {
+                    minPunkte = z;
+                }
+                if (z > maxPunkte)
+                {
+                    maxPunkte = z;
+                }
+                summePunktzahl += z;
+            }
+            double durchschnittlichePunktzahl
+                = summePunktzahl / (double)anzahlGebäude;
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -72,6 +106,30 @@ namespace KlassenFürKataster
             {
                 gebäude[i].Zeichne(Zeichenfläche);
             }
+        }
+    }
+
+    // class: Referenztyp
+    // Man bekommt eine Referenz (vgl. Pointer).
+    class A 
+    {
+        int x;
+        public int X { get { return x; } set { x = value; } }
+        public A(int x)
+        {
+            this.x = x;
+        }
+    }
+
+    // struct: Werttyp
+    // Man bekommt wirkliche Bytes.
+    struct B
+    {
+        int y;
+        public int Y { get { return y; } set { y = value; } }
+        public B(int y)
+        {
+            this.y = y;
         }
     }
 
@@ -105,8 +163,14 @@ namespace KlassenFürKataster
         string baur_text;
         string signa_text;
 
+        static int gesamtanzahlGebäude; // "static": bezieht sich auf Klasse statt Instanz
+        static public int GesamtanzahlGebäude { get { return gesamtanzahlGebäude; } }
+
+        public int ZahlDerPunkte { get { return umriss.Points.Count; } }
+
         public Gebäude(Polygon umriss, string id, ushort bauart, string baur_text, string signa_text)
         {
+            gesamtanzahlGebäude++;
             this.umriss = umriss;
             this.id = id;
             this.bauart = bauart;
@@ -121,7 +185,15 @@ namespace KlassenFürKataster
 
         public double BerechneFläche()
         {
-            return 42.0; // TO DO
+            double summe = 0.0;
+            Point p0 = umriss.Points[0];
+            for (int i = 1; i < ZahlDerPunkte - 1; i++)
+            {
+                Point pi = umriss.Points[i];
+                Point piPlus1 = umriss.Points[i + 1];
+                summe += 0.5 * ( ( pi.X - p0.X ) * (piPlus1.Y - p0.Y) - (pi.Y - p0.Y) * (piPlus1.X - p0.X));
+            }
+            return summe / (0.2 * 0.2); // Korrektur für Zoom
         }
     }
 }
