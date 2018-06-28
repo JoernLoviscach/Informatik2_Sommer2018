@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,49 @@ namespace VererbungCollectionsExceptions
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            int[,,] abc = new int[,,] { { { 1 } } };
+
+            int k = 0;
+            try
+            {
+                File.Delete(@"C:\Users\jl\Desktop\ordner 13\test 43.txt");
+                string[] s = File.ReadAllLines(@"C:\Users\jl\Desktop\ordner 13\test 42.txt");
+                for (; k < s.Length; k++)
+                {
+                    string[] teile = s[k].Split('\t');
+                    string zeichenkette = teile[0];
+                    int zahl1 = int.Parse(teile[1]);
+                    int zahl2 = int.Parse(teile[2]);
+                    File.AppendAllText(@"C:\Users\jl\Desktop\ordner 13\test 43.txt", zeichenkette + "\t" + (zahl1 + zahl2) + Environment.NewLine);
+                }
+            }
+            catch(IndexOutOfRangeException)
+            {
+                MessageBox.Show("Die Zeile " + (k+1) + " war zu kurz.");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
             Tier t = new Katze(42);
             t.Schlafe();
+            t.Friss(new Nahrung());
+
+            Tier.Klasse kl = Tier.Klasse.Amphibien;
+            switch (kl)
+            {
+                case Tier.Klasse.Amphibien:
+                    break;
+                case Tier.Klasse.Reptilien:
+                    break;
+                case Tier.Klasse.Säugetiere:
+                    break;
+                case Tier.Klasse.Vögel:
+                    break;
+                default:
+                    break;
+            }
 
             //Array
             Tier[] a = new Tier[10];
@@ -67,6 +109,8 @@ namespace VererbungCollectionsExceptions
     {
         int alter;
         public int Alter { get { return alter; } }
+
+        public enum Klasse { Amphibien, Reptilien, Säugetiere, Vögel };
 
         public Tier(int alter)
         {
